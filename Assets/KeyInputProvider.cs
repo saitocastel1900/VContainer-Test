@@ -1,29 +1,29 @@
-using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class KeyInputProvider : IInputProvider
 {
+    public bool InputAhead()
+    {
+        return Keyboard.current.wKey.isPressed;
+    }
+
     public bool InputLeft()
     {
-        return Input.GetKeyDown(KeyCode.A);
+        return Keyboard.current.aKey.isPressed;
     }
 
     public bool InputRight()
     {
-        return Input.GetKeyDown(KeyCode.D);
-    }
-    
-    public bool InputAhead()
-    {
-        return Input.GetKeyDown(KeyCode.W);
+        return Keyboard.current.dKey.isPressed;
     }
 
     public bool InputBack()
     {
-        return Input.GetKeyDown(KeyCode.S);
+        return Keyboard.current.sKey.isPressed;
     }
 
     public bool InputJump()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Keyboard.current.spaceKey.isPressed;
     }
 }
