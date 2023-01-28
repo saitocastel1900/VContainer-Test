@@ -1,29 +1,12 @@
-using UnityEngine.InputSystem;
+using System;
+using InputAsRx;
+using UniRx;
+using UnityEngine;
 
 public class KeyInputProvider : IInputProvider
 {
-    public bool InputAhead()
+    public IObservable<Unit> InputJump()
     {
-        return Keyboard.current.wKey.isPressed;
-    }
-
-    public bool InputLeft()
-    {
-        return Keyboard.current.aKey.isPressed;
-    }
-
-    public bool InputRight()
-    {
-        return Keyboard.current.dKey.isPressed;
-    }
-
-    public bool InputBack()
-    {
-        return Keyboard.current.sKey.isPressed;
-    }
-
-    public bool InputJump()
-    {
-        return Keyboard.current.spaceKey.isPressed;
+        return InputAsObservable.GetKeyDown(KeyCode.Space);
     }
 }
