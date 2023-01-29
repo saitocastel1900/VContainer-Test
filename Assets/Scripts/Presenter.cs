@@ -6,12 +6,12 @@ using VContainer.Unity;
 public class Presenter : IStartable, IDisposable
 {
     private readonly View _view;
-    private readonly Model _model;
+    private readonly IModel _model;
     
     private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
     [Inject]
-    public Presenter(View view, Model model)
+    public Presenter(View view, IModel model)
     {
         _view = view;
         _model = model;
@@ -19,21 +19,20 @@ public class Presenter : IStartable, IDisposable
 
     public void Start()
     {
-        _view.Initialize();
         Bind();
         SetEvent();
     }
 
     private void Bind()
     {
-        _model.ValueProp
+        _model.CountProp
             .Subscribe(_view.SetCount)
             .AddTo(_compositeDisposable);
     }
 
     private void SetEvent()
     {
-        _view.OnCallback += () => _model.AddScore();
+        _view.OnAnimationCallback += () => _model.AddCount();
         
         _view.InputJump()
             .Subscribe(_=>_view.Jump())

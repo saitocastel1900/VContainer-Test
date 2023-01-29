@@ -1,22 +1,17 @@
 using UniRx;
 
-public class Model
+public class Model : IModel
 {
-   public IReactiveProperty<int> ValueProp=>_valueProp;
-   private readonly IntReactiveProperty _valueProp;
+   public IReactiveProperty<int> CountProp=>_countProp;
+   private readonly IntReactiveProperty _countProp;
 
    public Model()
    {
-      _valueProp=new IntReactiveProperty(0);
+      _countProp=new IntReactiveProperty(0);
    }
 
-   public void AddScore()
+   public void AddCount()
    {
-      _valueProp.Value++;
-   }
-
-   private void SetValue(int value)
-   {
-      _valueProp.Value = value;
+      _countProp.Value++;
    }
 }

@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UniRx;
 
-public class IModel : MonoBehaviour
+public interface IModel
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public IReactiveProperty<int> CountProp { get; }
+    
+    public void AddCount();
 }

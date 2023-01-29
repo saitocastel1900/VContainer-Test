@@ -13,8 +13,8 @@ public class MvpLifetimeScope : LifetimeScope
 #elif UNITY_WEBGL
         builder.Register<IInputProvider,KeyInputProvider>(Lifetime.Transient);
 #endif
-        builder.Register<Model>(Lifetime.Transient);
-        
+        builder.Register<IModel,Model>(Lifetime.Transient);
+
         builder.RegisterComponent(_view);
 
         builder.RegisterEntryPoint<Presenter>();
