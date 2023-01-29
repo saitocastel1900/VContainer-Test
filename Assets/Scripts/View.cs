@@ -7,21 +7,23 @@ using VContainer;
 
 public class View : MonoBehaviour
 {
+    public event Action OnCallback;
+
     [SerializeField] private Transform _cubeTransform;
     private Sequence _sequence;
 
-    [SerializeField] private Text _text;
+    [SerializeField] private Text _countText;
 
-    [Inject] 
-    IInputProvider _input;
-    
-    public event Action OnCallBack;
+    [Inject] IInputProvider _input;
 
-    public Subject<Unit> _Subject;
-
-    public void SetText(string state)
+    public void Initialize()
     {
-        _text.text = state;
+        _countText.text = 0.ToString();
+    }
+
+    public void SetCount(int value)
+    {
+        _countText.text = value.ToString();
     }
 
     public IObservable<Unit> InputJump()
@@ -36,7 +38,7 @@ public class View : MonoBehaviour
         _sequence = DOTween.Sequence()
             .Join(_cubeTransform.DOJump(new Vector3(0, 0, 0), 3f, 1, 1.0f).SetRelative())
             .Join(_cubeTransform.DOPunchRotation(new Vector3(360f, 360f, 360f), 1.0f,5).SetRelative())
-            .SetEase(Ease.OutCubic).SetLink(this.gameObject).OnComplete(()=>OnCallBack?.Invoke());
+            .SetEase(Ease.OutCubic).OnComplete(()=>OnCallback?.Invoke()).SetLink(this.gameObject);
     }
 }
 

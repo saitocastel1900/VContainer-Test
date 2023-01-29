@@ -2,46 +2,21 @@ using UniRx;
 
 public class Model
 {
-   public IReactiveProperty<string> TextProp=>_textProp;
-   private readonly StringReactiveProperty _textProp;
+   public IReactiveProperty<int> ValueProp=>_valueProp;
+   private readonly IntReactiveProperty _valueProp;
 
    public Model()
    {
-      _textProp = new StringReactiveProperty("Idle");
+      _valueProp=new IntReactiveProperty(0);
    }
 
-   public void Ahead()
+   public void AddScore()
    {
-      SetText("Ahead");
+      _valueProp.Value++;
    }
 
-   public void Left()
+   private void SetValue(int value)
    {
-      SetText("Left");
-   }
-
-   public void Right()
-   {
-      SetText("Right");
-   }
-
-   public void Back()
-   {
-      SetText("Back");
-   }
-   
-   public void Jump()
-   {
-      SetText("Jump");
-   }
-
-   public void Idle()
-   {
-      SetText("Idle");
-   }
-
-   private void SetText(string value)
-   {
-      _textProp.Value = value;
+      _valueProp.Value = value;
    }
 }

@@ -19,21 +19,21 @@ public class Presenter : IStartable, IDisposable
 
     public void Start()
     {
+        _view.Initialize();
         Bind();
         SetEvent();
     }
 
     private void Bind()
     {
-        _model.TextProp
-            .DistinctUntilChanged()
-            .Subscribe(_view.SetText)
+        _model.ValueProp
+            .Subscribe(_view.SetCount)
             .AddTo(_compositeDisposable);
     }
 
     private void SetEvent()
     {
-        _view.OnCallBack += () => _model.Idle();
+        _view.OnCallback += () => _model.AddScore();
         
         _view.InputJump()
             .Subscribe(_=>_view.Jump())
